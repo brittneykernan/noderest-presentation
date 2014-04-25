@@ -1,0 +1,246 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    title REST with Node.js
+
+    // build:css styles/styles.css
+    //- Check out 'src/bower_components/prism/themes/' for available themes
+    link(rel='stylesheet', type='text/css', href='bower_components/prism/themes/prism-tomorrow.css')
+    link(rel='stylesheet', type='text/css', href='styles/main.css')
+    // endbuild
+
+  body
+
+    article
+
+      section(data-bespoke-state='title')
+        h1 REST with Node.js
+
+      section(data-bespoke-state='intro')
+        h2 Mental Map
+        h3 REST + Node.js?
+
+      section(data-bespoke-state='intro')
+        h2 REST + PHP
+        ul
+          li 
+          li Apache
+          li .php controllers
+          li .htaccess pretty urls
+          li Content-Type JSON Headers
+          li MySQLi 
+
+      section(data-bespoke-state='intro')
+        h2 REST + Nodejs
+        ul
+          li 
+          li Node.js
+          li Express
+          li JavaScript modules
+          li Routes
+          li Mongo
+
+      section(data-bespoke-state='server')
+        h2 Node.js
+        h3 server.js
+        hr
+        pre
+          code.language-javascript.
+            var http = require('http');
+            http.createServer(function (req, res) {
+              res.writeHead(200, {'Content-Type': 'text/plain'});
+              res.end('Hello World\n');
+            }).listen(3000, '127.0.0.1');
+            console.log('Server running at http://127.0.0.1:3000/');
+
+      section(data-bespoke-state='server')
+        h2 Node.js
+        h3 Folder Structure
+        hr
+        img(src="img/step1.gif")
+
+      section(data-bespoke-state='node')
+        h2 Node.js 
+        h3 Terminal command
+        hr
+        pre
+          code.language-javascript.
+            cd noderest_project/
+            node server.js
+
+      section(data-bespoke-state='node')
+        h2 Node.js
+        h3 server started
+        hr
+        img(src="img/terminal1.gif",height="388",width="585")
+
+      section(data-bespoke-state='express')
+        h2 Express
+        h3 App Framework for Node
+        h3 package.json
+        hr
+        pre
+          code.language-javascript.
+            {
+                "name": "wine-cellar",
+                "description": "Wine Cellar Application",
+                "version": "0.0.1",
+                "private": true,
+                "dependencies": {
+                    "express": "3.x"
+                }
+            }
+
+      section(data-bespoke-state='server')
+        h2 Add Express
+        h3 server.js
+        hr
+        pre
+          code.language-javascript.
+            var express = require('express');
+ 
+            var app = express();
+             
+            app.get('/', function(req, res) {
+                res.send('Hello World\n');
+            });
+
+            app.listen(3000);
+            console.log('Listening on port 3000...');
+
+      section(data-bespoke-state='express')
+        h2 Express
+        hr
+        pre
+          code.language-javascript.
+            npm install
+
+      section(data-bespoke-state='node')
+        h2 Express
+        h3 installed and server restarted
+        hr
+        img(src="img/terminal2.gif",height="388",width="585")
+
+
+      section(data-bespoke-state='server')
+        h2 Express
+        h3 Folder Structure
+        hr
+        img(src="img/step2.gif")
+
+      section(data-bespoke-state='express')
+        h2 Routes
+        hr
+        pre
+          code.language-javascript.
+            app.get('/path', function(req, res) {
+                res.send('Return JSON or HTML View');
+            });
+
+      section(data-bespoke-state='express')
+        h2 Request
+        h3 req
+        hr
+        pre
+          code.language-javascript.
+            app.get('/snack/:brand', function(req, res) {
+
+                // Get /snack/nabisco
+                console.log(req.params.brand)
+                // => nabisco
+
+                res.send('{"id": 1,"brand": "nabisco","products": 
+                  [{"id": 1, "name": "oreo"}]}');
+            });
+
+      section(data-bespoke-state='express')
+        h2 Response
+        h3 res
+        hr
+        pre
+          code.language-javascript.
+            res.send({ some: 'json' });
+            res.send('html for oreo page');
+            res.send(404, 'No snacks here');
+            res.send(500, { error: 'you blew it' });
+            res.send(200);
+
+      section(data-bespoke-state='express')
+        h2 HTTP verbs
+        h3 routes.js
+        hr
+        pre
+          code.language-javascript.
+            module.exports = function(app){
+              var snacks = require('./controllers/snacks');
+
+              app.get('/snacks', snacks.findAll);
+              app.get('/snacks/:id', snacks.findById);
+              app.post('/snacks', snacks.add);
+              app.put('/snacks/:id', snacks.update);
+              app.delete('/snacks/:id', snacks.delete);
+            }
+
+      section(data-bespoke-state='express')
+        h2 JS Modules
+        h3 controllers/snacks.js
+        hr
+        pre
+          code.language-javascript.
+            exports.findAll = function(req, res){
+              res.send({
+                "id": 1,
+                "brand": "nabisco",
+                "products": [{"id": 1,"name": "oreo"}]
+              });
+            };
+
+      section(data-bespoke-state='server')
+        h2 Import Routes and JS Modules
+        h3 server.js
+        hr
+        pre
+          code.language-javascript.
+            var express = require('express');
+ 
+            var app = express();             
+            
+            require('routes')(app);
+
+            app.listen(3000);
+            console.log('Listening on port 3000...');
+
+      section(data-bespoke-state='express')
+        h2 Mongo DB
+        h3 controllers/snacks.js
+        hr
+        pre
+          code.language-javascript.
+            var mongoose = require('mongoose'),
+            Snack = mongoose.model('Snack');
+          
+            exports.findAll = function(req, res){
+              Snack.find({},function(err, results) {
+                return res.send(results);
+              });
+            };
+
+      section(data-bespoke-state='express')
+        
+
+    script(src="//use.typekit.net/eag8wad.js")
+    // build:js scripts/scripts.js
+    script(src='bower_components/bespoke.js/dist/bespoke.min.js')
+    script(src='bower_components/bespoke-keys/dist/bespoke-keys.min.js')
+    script(src='bower_components/bespoke-touch/dist/bespoke-touch.min.js')
+    script(src='bower_components/bespoke-bullets/dist/bespoke-bullets.min.js')
+    script(src='bower_components/bespoke-scale/dist/bespoke-scale.min.js')
+    script(src='bower_components/bespoke-hash/dist/bespoke-hash.min.js')
+    script(src='bower_components/bespoke-progress/dist/bespoke-progress.min.js')
+    script(src='bower_components/bespoke-state/dist/bespoke-state.min.js')
+    script(src='bower_components/bespoke-forms/dist/bespoke-forms.min.js')
+    script(src='bower_components/prism/prism.js')
+    script(src='scripts/main.js')
+    // endbuild
