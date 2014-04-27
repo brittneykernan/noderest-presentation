@@ -21,8 +21,8 @@
     "grunt-open": "~0.2.1",
     "grunt-gh-pages": "~0.6.0",
     "matchdep": "~0.3.0",
-    "grunt-shell": "~0.6.4",
-    "nodemon": "~1.0.17"
+    "grunt-concurrent": "^0.5.0",
+    "grunt-nodemon": "^0.2.1"
   },
   "engines": {
     "node": ">=0.8.0"

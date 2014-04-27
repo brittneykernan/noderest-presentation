@@ -13,6 +13,20 @@ html
 
   body
 
+    div(id='folder-structure')
+      h5 Open Files
+      h5 Folders
+      ul noderest
+        li server.js
+        li.package-json package.json 
+        li.node-modules
+          ul node_modules 
+            li express
+        li.routes-js routes.js
+        li.controllers
+          ul controllers
+            li snacks.js
+
     article
 
       section(data-bespoke-state='title')
@@ -55,13 +69,7 @@ html
             }).listen(3000, '127.0.0.1');
             console.log('Server running at http://127.0.0.1:3000/');
 
-      section(data-bespoke-state='server')
-        h2 Node.js
-        h3 Folder Structure
-        hr
-        img(src="img/step1.gif")
-
-      section(data-bespoke-state='node')
+      section#npm-install(data-bespoke-state='node')
         h2 Node.js 
         h3 Terminal command
         hr
@@ -76,7 +84,7 @@ html
         hr
         img(src="img/terminal1.gif",height="388",width="585")
 
-      section(data-bespoke-state='express')
+      section#package-json(data-bespoke-state='express')
         h2 Express
         h3 App Framework for Node
         h3 package.json
@@ -228,6 +236,13 @@ html
             };
 
       section(data-bespoke-state='express')
+        h2 Credits
+        a(href="http://expressjs.com/4x/api.html") Express API Reference
+        a(href="http://coenraets.org/blog/2012/10/creating-a-rest-api-using-node-js-express-and-mongodb/") Creating a REST API using Node.js, Express, and MongoDB
+        a(href="https://github.com/markdalgleish/bespoke.js") Bespoke.js
+        a(href="http://blog.dfilimonov.com/2013/09/12/devtools-terminal.html") Devtools Terminal
+
+
         
 
     script(src="//use.typekit.net/eag8wad.js")

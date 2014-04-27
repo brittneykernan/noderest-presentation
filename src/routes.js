@@ -6,4 +6,8 @@ module.exports = function(app){
 	app.get('/snacks/:id', snacks.findById); 
 	app.get('/import', snacks.import);  
 
+	app.get('/hello', function(req,res) {
+		res.send('Hello world')
+	});  
+
 };

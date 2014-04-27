@@ -3,14 +3,9 @@
 module.exports = function(grunt) {
 
   var config = { 
-    serverFile: 'server.js',
-    shell: {
-      nodemon: {
-        command: 'nodemon <%= serverFile %>',
-        options: {
-          stdout: true,
-          stderr: true
-        }
+    nodemon: {
+      dev: {
+        script: 'server.js'
       }
     },
     clean: {
@@ -26,7 +21,8 @@ module.exports = function(grunt) {
           ext: '.html'
         }],
         options: {
-          pretty: true
+          pretty: true,
+          livereload: true
         }
       }
     },
@@ -40,7 +36,8 @@ module.exports = function(grunt) {
           ext: '.css'
         }],
         options: {
-          compress: false
+          compress: false,
+          livereload: true
         }
       }
     },
@@ -102,29 +99,6 @@ module.exports = function(grunt) {
         }
       }
     },
-    /*connect: {
-      server: {
-        options: {
-          port: 8000,
-          hostname: '*', // Remove this line if you only want the server available locally
-          base: 'public',
-          keepalive: true,
-          middleware: function(connect, options) {
-            return [
-              require('connect-livereload')({
-                port: config.watch.public.options.livereload
-              }),
-              connect.static(options.base)
-            ];
-          }
-        }
-      }
-    },
-    open: {
-      server: {
-        path: 'http://localhost:<%= connect.server.options.port %>'
-      }
-    },*/
     concurrent: {
       compile: {
         tasks: [
@@ -140,6 +114,7 @@ module.exports = function(grunt) {
       server: {
         tasks: [
           //'develop:server',
+          'nodemon',
           //'open',
           'watch:jade',
           'watch:stylus',
@@ -177,7 +152,7 @@ module.exports = function(grunt) {
   // Load all Grunt tasks
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
-  grunt.registerTask('default', ['shell:nodemon', 'compile', 'concurrent:server']);
+  grunt.registerTask('default', ['compile', 'concurrent:server']);
   //grunt.registerTask('default', ['compile', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'usemin']);
   grunt.registerTask('compile', ['clean', 'concurrent:compile']);
   //grunt.registerTask('server', ['shell:nodemon','compile', 'concurrent:server']);
