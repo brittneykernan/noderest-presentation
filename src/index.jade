@@ -66,6 +66,40 @@ html
         li $
         li $ node server.js
         li Listening on port 3001...
+        li $ npm install mongoose --save-dev
+        li 
+          span.synt-hi-node npm
+          &nbsp;
+          span.synt-hi-http http
+          &nbsp;
+          span.synt-hi-prot GET 
+          span https://registry.npmjs.org/mongoose
+        li 
+          span.synt-hi-node npm
+          &nbsp;
+          span.synt-hi-http http
+          &nbsp;
+          span.synt-hi-prot 200 
+          span https://registry.npmjs.org/mongoose
+        li > kerberos@0.0.3 install /Applications/MAMP/htdocs/noderest_project/node_modules/mongoose/node_modules/mongodb/node_modules/kerberos
+        li > (node-gyp rebuild 2> builderror.log) || (exit 0)
+        li 
+        li CXX(target) Release/obj.target/kerberos/lib/kerberos.o
+        li SOLINK_MODULE(target) Release/bson.node: Finished
+        li mongoose@3.8.8 node_modules/mongoose
+        li ├── regexp-clone@0.0.1
+        li ├── muri@0.3.1
+        li ├── sliced@0.0.5
+        li ├── hooks@0.2.1
+        li ├── mpath@0.1.1
+        li ├── mpromise@0.4.3
+        li ├── ms@0.1.0
+        li ├── mquery@0.5.3 (debug@0.7.4)
+        li └── mongodb@1.3.23 (kerberos@0.0.3, bson@0.2.5)
+        li $
+        li $ node server4.js
+        li Listening on port 3001...
+        li snacks imported
 
     article
 
@@ -96,7 +130,7 @@ html
           li Routes
           li Mongo
 
-      section(data-bespoke-state='server')
+      section(data-bespoke-state='node')
         h2 Node.js
         h3 server.js
         hr
@@ -153,11 +187,11 @@ html
           code.language-javascript.
             $ npm install
 
-      section(data-bespoke-state='node')
+      section(data-bespoke-state='express')
         h2 Express
         h3 installing
 
-      section(data-bespoke-state='server')
+      section(data-bespoke-state='express')
         h2 Add Express
         h3 server.js
         hr
@@ -246,14 +280,15 @@ html
         pre
           code.language-javascript.
             exports.findAll = function(req, res){
-              res.send({
+              res.send([{
                 "id": 1,
-                "brand": "nabisco",
-                "products": [{"id": 1,"name": "oreo"}]
-              });
+                "title": "Oreo",
+                "brand": "Nabisco",
+                "count": "3"
+              }]);
             };
 
-      section(data-bespoke-state='server')
+      section(data-bespoke-state='express')
         h2 Import Routes and JS Modules
         h3 server.js
         hr
@@ -295,19 +330,243 @@ html
               });
             };
 
+      section(data-bespoke-state='mongo')
+        h2 MongoDB
+        h3 start mongo
+        hr
+        pre
+          code.language-javascript.
+            $ mongod
 
+      section(data-bespoke-state='mongo')
+        h2 Mongoose.js
+        h3 install Mongo Node model framework
+        hr
+        pre
+          code.language-javascript.
+            $ npm install mongoose --save-dev
 
-            
+      section(data-bespoke-state='mongo')
+        h2 Mongoose.js
+        h3 installing
 
-      section(data-bespoke-state='express')
-        h2 Credits
+      section(data-bespoke-state='mongo')
+        h2 Update Server
+        h3 server.js
+        pre 
+          code.language-javascript.
+            var express = require('express'),
+            mongoose = require('mongoose'),
+            fs = require('fs');
+           
+            var mongoUri = 'mongodb://localhost/noderest_project'; 
+            mongoose.connect(mongoUri);
+            var db = mongoose.connection;
+            db.on('error', function () {
+              throw new Error('unable to connect to database at ' + mongoUri);
+            });
+
+            var app = express();
+             
+            require('./models/snack')
+            require('./routes')(app);
+
+            app.listen(3001);
+            console.log('Listening on port 3001...');
+
+      section(data-bespoke-state='mongo')
+        h2 Model Schema
+        h3 models/snack.js
+        pre 
+          code.language-javascript.
+            var mongoose = require('mongoose'),
+            Schema = mongoose.Schema;
+
+            var SnackSchema = new Schema({
+              title: String,
+              brand: String,
+              count: String
+            });
+
+            mongoose.model('Snack', SnackSchema);
+
+      section(data-bespoke-state='mongo')
+        h2 Mongo
+        h3 restart Node with Mongo
+        pre 
+          code.language-javascript.
+            CTRL+C
+
+      section(data-bespoke-state='mongo')
+        h2 REST GET
+        h3 /snacks
+        img(src="img/browser-no-snacks.gif",height="282",width="394")
+
+      section(data-bespoke-state='mongo')
+        h2 Mongo Data Import
+        h3 add route to routes.js
+        pre 
+          code.language-javascript.
+            app.get('/import', snacks.import);  
+
+      section(data-bespoke-state='mongo')
+        h2 Mongo Data Import
+        h3 add method to controller/snacks.js
+        pre 
+          code.language-javascript.            
+            exports.import = function(req, res){
+              Snack.create(
+                { "title": "Oreo","brand": "Nabisco", "count": "3" },
+                { "title": "Nutter Butter", "brand": "Nabisco", "count": "5" },
+                { "title": "baby carrots", "brand": "Bodega Plus", "count": "1" },
+                { "title": "Koala Yummies", "brand": "Lotte Co.", "count": "0" }   
+              , function (err) {
+                console.log('snacks imported');
+              });
+            };
+
+      section(data-bespoke-state='mongo')
+        h2 Node.js
+        h3 restart node server
+        pre 
+          code.language-javascript.
+            CTRL+C
+
+      section(data-bespoke-state='mongo')
+        h2 Run Import
+        h3 /import
+        img(src="img/browser-import.gif",height="282",width="394")
+
+      section(data-bespoke-state='mongo')
+        h2 Data Imported
+        h3 /snacks
+        img(src="img/browser-data.gif",height="282",width="394")
+
+      section(data-bespoke-state='mongo')
+        h2 Route GET to findAll
+        h3 app.get('/snacks', snacks.findAll); 
+        hr
+        pre
+          code.language-javascript.
+            exports.findAll = function(req, res){
+              Snack.find({},function(err, results) {
+                return res.send(results);
+              });
+            };    
+
+      section(data-bespoke-state='mongo')
+        h2 Route GET to findById
+        h3 app.get('/snacks/:id', snacks.findById);
+        hr
+        pre
+          code.language-javascript.
+            exports.findById = function(req, res){
+              var id = req.params.id;
+              Snack.findOne({'_id':id},function(err, result) {
+                return res.send(result);
+              });
+            };
+
+      section(data-bespoke-state='mongo')
+        h2 GET by Id
+        h3 /snacks/:id
+        img(src="img/browser-by-id.gif",height="282",width="394")  
+
+      section(data-bespoke-state='mongo')
+        h2 Route PUT to update
+        h3 app.put('/snacks/:id', snacks.update);
+        hr
+        pre
+          code.language-javascript.
+            exports.update = function(req, res) {
+              var id = req.params.id;
+              var updates = req.body;
+
+              Snack.update({'_id':id}, req.body, 
+                function (err, numberAffected) {
+                  if (err) return console.log(err);
+                  console.log('Updated %d documents', numberAffected);
+              });
+            }   
+
+      section(data-bespoke-state='mongo')
+        h2 PUT
+        h3 use cURL to test
+        hr
+        pre 
+          code.language-javascript.
+            $ curl -i -X PUT -H 'Content-Type: application/json' -d '{"count": "2"}' 
+              http://localhost:3001/snacks/535ea3fc29b5c50000c685db
+
+      section(data-bespoke-state='mongo')
+        h2 Updated
+        h3 /snacks/:id
+        img(src="img/browser-put.gif",height="282",width="394") 
+
+      section(data-bespoke-state='mongo')
+        h2 Route POST to add
+        h3 app.post('/snacks', snacks.add);
+        hr
+        pre
+          code.language-javascript.
+            exports.add = function(req, res) {
+              Snack.create(req.body, function (err, snack) {
+                if (err) return console.log(err); 
+                return res.send(snack);
+              });
+            }   
+
+      section(data-bespoke-state='mongo')
+        h2 POST
+        h3 use cURL to test
+        hr
+        pre 
+          code.language-javascript.
+            $ curl -i -X POST -H 'Content-Type: application/json' -d 
+              '{"title": "Milano", "brand": "Pepperidge Farm","count":"3"}' 
+              http://localhost:3001/snacks 
+
+      section(data-bespoke-state='mongo')
+        h2 Added
+        h3 /snacks
+        img(src="img/browser-post.gif",height="282",width="394")   
+      
+      section(data-bespoke-state='mongo')
+        h2 Route DELETE to delete
+        h3 app.delete('/snacks/:id', snacks.delete);
+        hr
+        pre
+          code.language-javascript.
+            exports.delete = function(req, res){
+              var id = req.params.id;
+              Snack.remove({'_id':id},function(result) {
+                return res.send(result);
+              });
+            };
+      
+      section(data-bespoke-state='mongo')
+        h2 DELETE
+        h3 use cURL to test
+        hr
+        pre 
+          code.language-javascript.
+            $ curl -i -X DELETE http://localhost:3001/snacks/535ec13f9b9d6f0000b2acca
+
+      section(data-bespoke-state='mongo')
+        h2 Deleted
+        h3 /snacks
+        img(src="img/browser-delete.gif",height="282",width="394")  
+
+      section(data-bespoke-state='title')
+        h2 Thanks
+
+      section(data-bespoke-state='title')
+        h2 Reference
         a(href="http://expressjs.com/4x/api.html") Express API Reference
+        a(href="http://mongoosejs.com/docs/api.html") Mongoose.js API docs
         a(href="http://coenraets.org/blog/2012/10/creating-a-rest-api-using-node-js-express-and-mongodb/") Creating a REST API using Node.js, Express, and MongoDB
         a(href="https://github.com/markdalgleish/bespoke.js") Bespoke.js
-        a(href="http://blog.dfilimonov.com/2013/09/12/devtools-terminal.html") Devtools Terminal
-
-
-        
+       
 
     script(src="//use.typekit.net/eag8wad.js")
     // build:js scripts/scripts.js
