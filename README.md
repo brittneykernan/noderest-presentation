@@ -15,3 +15,8 @@ Then, install dependencies and run the preview server:
 $ npm install && bower install
 $ grunt server
 ```
+
+## TODO
+1. Show screenshots of in browser responses
+2. Fix slide colors
+3. Do the mongo part?
