@@ -176,19 +176,12 @@ article
   background: slide_bg_green
 
 // folder styles
-#folder-structure 
-  transition: width 0.3s
-  background: #e6e6e6
+#folder-structure,
+#terminal  
   position: absolute
-  height: 100%
-  width: 0
   text-shadow: 0px 1px 1px white
   color: #000
-  font-size: 16px;
-  padding: 10px;
   box-sizing: border-box;
-  white-space: nowrap
-  font-family: arial
   h5 
     color: #aaa
     font-size: 14px
@@ -198,6 +191,16 @@ article
   li 
     transition: opacity 0.3s, transform 0.3s
     margin: 7px 20px
+
+#folder-structure
+  transition: width 0.3s
+  background: #e6e6e6
+  height: 100%
+  width: 0
+  font-size: 16px
+  white-space: nowrap
+  padding: 10px;
+  font-family: arial
 
 .node-modules, 
 .package-json,
@@ -225,6 +228,37 @@ article
     transform: translateX(0%)
     opacity: 1
 
+#terminal 
+  transition: height 0.3s, padding 0.3s
+  width: 20%
+  height: 0%
+  background: #fff
+  bottom: 0
+  color: #000
+  text-shadow: none
+  font-family: menlo, courier
+  font-size: 13px
+  overflow: scroll
+  li 
+    margin: 0
+    display:none;
+
+.show-term#terminal 
+  height: 50%
+  padding: 10px;
+
+.synt-hi-node,
+.synt-hi-http 
+  background: #000
+
+.synt-hi-node
+  color: #bfbfbf
+
+.synt-hi-http
+  color: #00a631
+
+.synt-hi-prot
+  color: #d63ccb
 
 // prism styles
 

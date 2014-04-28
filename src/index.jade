@@ -13,7 +13,7 @@ html
 
   body
 
-    div(id='folder-structure')
+    div#folder-structure
       h5 Open Files
       h5 Folders
       ul noderest
@@ -26,6 +26,46 @@ html
         li.controllers
           ul controllers
             li snacks.js
+
+    div#terminal
+      ul
+        li $ cd noderest/
+        li $ node server.js
+        li Server running at http://127.0.0.1:3000/
+        li $ npm install
+        li 
+          span.synt-hi-node npm
+          &nbsp;
+          span.synt-hi-http http
+          &nbsp;
+          span.synt-hi-prot GET 
+          span https://registry.npmjs.org/express
+        li 
+          span.synt-hi-node npm
+          &nbsp;
+          span.synt-hi-http http
+          &nbsp;
+          span.synt-hi-prot 200 
+          span https://registry.npmjs.org/express
+        li express@3.5.2 node_modules/express
+        li ├── methods@0.1.0
+        li ├── merge-descriptors@0.0.2
+        li ├── cookie@0.1.2
+        li ├── cookie-signature@1.0.3
+        li ├── range-parser@1.0.0
+        li ├── debug@0.8.1
+        li ├── fresh@0.2.2
+        li ├── buffer-crc32@0.2.1
+        li ├── mkdirp@0.4.0
+        li ├── commander@1.3.2 (keypress@0.1.0)
+        li ├── send@0.3.0 (debug@0.8.0, mime@1.2.11)
+        li └── connect@2.14.5 (response-time@1.0.0, pause@0.0.1, connect-timeout@1.0.0, method-override@1.0.0, qs@0.6.6, basic-auth-connect@1.0.0, vhost@1.0.0, bytes@0.3.0, raw-body@1.1.4, static-favicon@1.0.2, errorhandler@1.0.0, setimmediate@1.0.1, serve-static@1.1.0, morgan@1.0.0, csurf@1.1.0, cookie-parser@1.0.1, compression@1.0.0, express-session@1.0.2, serve-index@1.0.1, multiparty@2.2.0)
+        li $
+        li $ node server.js
+        li Listening on port 3000...        
+        li $
+        li $ node server.js
+        li Listening on port 3000...
 
     article
 
@@ -75,8 +115,12 @@ html
         hr
         pre
           code.language-javascript.
-            cd noderest_project/
-            node server.js
+            $ cd noderest/
+            $ node server.js
+
+      section#npm-install(data-bespoke-state='node')
+        h2 Node.js 
+        h3 start node
 
       section(data-bespoke-state='node')
         h2 Node.js
@@ -85,21 +129,33 @@ html
         img(src="img/terminal1.gif",height="388",width="585")
 
       section#package-json(data-bespoke-state='express')
-        h2 Express
-        h3 App Framework for Node
+        h2 Add Dependencies
+        h3 Express: App Framework for Node
         h3 package.json
         hr
         pre
           code.language-javascript.
             {
-                "name": "wine-cellar",
-                "description": "Wine Cellar Application",
+                "name": "Node REST Demo",
+                "description": "Demo REST API with Node",
                 "version": "0.0.1",
                 "private": true,
                 "dependencies": {
                     "express": "3.x"
                 }
             }
+
+      section(data-bespoke-state='express')
+        h2 Install Dependencies
+        h3 Express is only dependency
+        hr
+        pre
+          code.language-javascript.
+            $ npm install
+
+      section(data-bespoke-state='node')
+        h2 Express
+        h3 installing
 
       section(data-bespoke-state='server')
         h2 Add Express
@@ -120,23 +176,7 @@ html
 
       section(data-bespoke-state='express')
         h2 Express
-        hr
-        pre
-          code.language-javascript.
-            npm install
-
-      section(data-bespoke-state='node')
-        h2 Express
-        h3 installed and server restarted
-        hr
-        img(src="img/terminal2.gif",height="388",width="585")
-
-
-      section(data-bespoke-state='server')
-        h2 Express
-        h3 Folder Structure
-        hr
-        img(src="img/step2.gif")
+        h3 restart Node with Express
 
       section(data-bespoke-state='express')
         h2 Routes
@@ -219,6 +259,11 @@ html
 
             app.listen(3000);
             console.log('Listening on port 3000...');
+
+      section(data-bespoke-state='express')
+        h2 Node.js
+        h3 restart node server
+
 
       section(data-bespoke-state='express')
         h2 Mongo DB
