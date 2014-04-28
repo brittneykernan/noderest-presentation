@@ -31,7 +31,7 @@ html
       ul
         li $ cd noderest/
         li $ node server.js
-        li Server running at http://127.0.0.1:3000/
+        li Server running at http://127.0.0.1:3001/
         li $ npm install
         li 
           span.synt-hi-node npm
@@ -62,10 +62,10 @@ html
         li └── connect@2.14.5 (response-time@1.0.0, pause@0.0.1, connect-timeout@1.0.0, method-override@1.0.0, qs@0.6.6, basic-auth-connect@1.0.0, vhost@1.0.0, bytes@0.3.0, raw-body@1.1.4, static-favicon@1.0.2, errorhandler@1.0.0, setimmediate@1.0.1, serve-static@1.1.0, morgan@1.0.0, csurf@1.1.0, cookie-parser@1.0.1, compression@1.0.0, express-session@1.0.2, serve-index@1.0.1, multiparty@2.2.0)
         li $
         li $ node server.js
-        li Listening on port 3000...        
+        li Listening on port 3001...        
         li $
         li $ node server.js
-        li Listening on port 3000...
+        li Listening on port 3001...
 
     article
 
@@ -106,8 +106,8 @@ html
             http.createServer(function (req, res) {
               res.writeHead(200, {'Content-Type': 'text/plain'});
               res.end('Hello World\n');
-            }).listen(3000, '127.0.0.1');
-            console.log('Server running at http://127.0.0.1:3000/');
+            }).listen(3001, '127.0.0.1');
+            console.log('Server running at http://127.0.0.1:3001/');
 
       section#npm-install(data-bespoke-state='node')
         h2 Node.js 
@@ -126,7 +126,7 @@ html
         h2 Node.js
         h3 server started
         hr
-        img(src="img/terminal1.gif",height="388",width="585")
+        img(src="img/browser-node.gif",height="282",width="394")
 
       section#package-json(data-bespoke-state='express')
         h2 Add Dependencies
@@ -171,12 +171,20 @@ html
                 res.send('Hello World\n');
             });
 
-            app.listen(3000);
-            console.log('Listening on port 3000...');
+            app.listen(3001);
+            console.log('Listening on port 3001...');
 
       section(data-bespoke-state='express')
         h2 Express
         h3 restart Node with Express
+        pre 
+          code.language-javascript.
+            CTRL+C
+
+      section(data-bespoke-state='express')
+        h2 Node and Express
+        h3 serving different headers
+        img(src="img/browser-express.gif",height="282",width="394")
 
       section(data-bespoke-state='express')
         h2 Routes
@@ -257,13 +265,20 @@ html
             
             require('routes')(app);
 
-            app.listen(3000);
-            console.log('Listening on port 3000...');
+            app.listen(3001);
+            console.log('Listening on port 3001...');
 
       section(data-bespoke-state='express')
         h2 Node.js
         h3 restart node server
+        pre 
+          code.language-javascript.
+            CTRL+C
 
+      section(data-bespoke-state='express')
+        h2 REST GET
+        h3 /snacks
+        img(src="img/browser-snacks.gif",height="282",width="394")
 
       section(data-bespoke-state='express')
         h2 Mongo DB
@@ -279,6 +294,10 @@ html
                 return res.send(results);
               });
             };
+
+
+
+            
 
       section(data-bespoke-state='express')
         h2 Credits

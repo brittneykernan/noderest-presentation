@@ -36,16 +36,20 @@ function updateFolder(e) {
     step = 1; 
   } else if( e.index < 10 ) {
     step = 2 
-  } else if ( e.index < 16 ){
+  } else if ( e.index < 14 ){
     step = 3
-  } else if ( e.index < 17 ) {
+  } else if ( e.index < 17 ){
+    step = 0
+  } else if ( e.index < 18 ) {
     step = 4   
   } else {
     step = 5
   } 
 
   if(step > 0)
-  document.body.className = 'folders-open-' + step 
+    document.body.className = 'folders-open-' + step 
+  else
+    document.body.className = '' 
 }
 
 function updateTerminal(e) {
@@ -87,7 +91,7 @@ function updateTerminal(e) {
     }, 500)
   }
 
-  if( e.index > 18 && lis[22].style.display != 'block') {
+  if( e.index > 19 && lis[22].style.display != 'block') {
     showNextLi();
     setTimeout(function() {
       showNextLi()
