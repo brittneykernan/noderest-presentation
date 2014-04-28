@@ -26,6 +26,9 @@ html
         li.controllers
           ul controllers
             li snacks.js
+        li.models
+          ul models
+            li snack.js
 
     div#terminal
       ul
@@ -66,6 +69,8 @@ html
         li $
         li $ node server.js
         li Listening on port 3001...
+        li $ mongod
+        li &nbsp;
         li $ npm install mongoose --save-dev
         li 
           span.synt-hi-node npm
@@ -97,9 +102,26 @@ html
         li ├── mquery@0.5.3 (debug@0.7.4)
         li └── mongodb@1.3.23 (kerberos@0.0.3, bson@0.2.5)
         li $
-        li $ node server4.js
+        li $ node server.js
         li Listening on port 3001...
-        li snacks imported
+        li curl -i -X PUT -H 'Content-Type: application/json' -d '{"count": "2"}' http://localhost:3001/snacks/535ea3fc29b5c50000c685db
+        li HTTP/1.1 200 OK
+        li X-Powered-By: Express
+        li Content-Type: application/json; charset=utf-8
+        li Content-Length: 88
+        li Date: Mon, 28 Apr 2014 22:27:04 GMT
+        li Connection: keep-alive
+        li &nbsp;
+        li {
+        li    "updatedExisting": true,
+        li    "n": 1,
+        li    "connectionId": 330,
+        li    "err": null,
+        li    "ok": 1
+        li  }
+        li $ 
+
+
 
     article
 
@@ -367,6 +389,10 @@ html
             });
 
             var app = express();
+
+            app.configure(function(){
+              app.use(express.bodyParser());
+            });
              
             require('./models/snack')
             require('./routes')(app);
@@ -420,8 +446,9 @@ html
                 { "title": "Nutter Butter", "brand": "Nabisco", "count": "5" },
                 { "title": "baby carrots", "brand": "Bodega Plus", "count": "1" },
                 { "title": "Koala Yummies", "brand": "Lotte Co.", "count": "0" }   
-              , function (err) {
-                console.log('snacks imported');
+              , function (err) {                
+                if (err) return console.log(err); 
+                return res.send(202);
               });
             };
 

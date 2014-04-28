@@ -42,8 +42,10 @@ function updateFolder(e) {
     step = 0
   } else if ( e.index < 18 ) {
     step = 4   
+  } else if ( e.index < 27 ) {
+    step = 5   
   } else {
-    step = 5
+    step = 6
   } 
 
   if(step > 0)
@@ -100,6 +102,36 @@ function updateTerminal(e) {
       }, 500)
     }, 500)
   }
+
+  if( e.index > 22  && lis[26].style.display != 'block') {
+    showNextLi();   
+    setTimeout(function() {
+      showNextLi()
+    }, 500) 
+  }
+
+  if( e.index > 23  && lis[28].style.display != 'block') {
+    showNextLi();   
+  }
+
+  if( e.index > 24  && lis[29].style.display != 'block') {
+    setTimeout(function() {
+      showNextLi()
+      window.term = setInterval(function() {
+        showNextLi()
+        if( liIndx > 45 ) 
+          window.clearInterval(window.term)
+     }, timing);
+    }, 1000)
+  }
+
+  if( e.index > 27  && lis[46].style.display != 'block') {
+    showNextLi()
+    setInterval(function() {
+      showNextLi()
+     }, 500);
+  }
+
 }
 
 function showNextLi() {

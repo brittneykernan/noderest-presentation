@@ -1,6 +1,6 @@
 module.exports = function(app){
 
-	var snacks = require('./controllers/snacks2');
+	var snacks = require('./controllers/snacks');
 
 	app.get('/snacks', snacks.findAll); 
 	app.get('/snacks/:id', snacks.findById); 
