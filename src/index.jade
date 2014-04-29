@@ -25,10 +25,10 @@ html
         li.routes-js routes.js
         li.controllers
           ul controllers
-            li snacks.js
+            li musicians.js
         li.models
           ul models
-            li snack.js
+            li musician.js
 
     div#terminal
       ul
@@ -68,7 +68,7 @@ html
         li Listening on port 3001...        
         li $
         li $ node server.js
-        li Listening on port 3001...
+        li Jammin' on port 3001...
         li $ mongod
         li &nbsp;
         li $ npm install mongoose --save-dev
@@ -104,7 +104,7 @@ html
         li $
         li $ node server.js
         li Listening on port 3001...
-        li curl -i -X PUT -H 'Content-Type: application/json' -d '{"count": "2"}' http://localhost:3001/snacks/535ea3fc29b5c50000c685db
+        li curl -i -X PUT -H 'Content-Type: application/json' -d '{"instrument": "voice"}' http://localhost:3001/musicians/535ea3fc29b5c50000c685db
         li HTTP/1.1 200 OK
         li X-Powered-By: Express
         li Content-Type: application/json; charset=utf-8
@@ -161,7 +161,7 @@ html
             var http = require('http');
             http.createServer(function (req, res) {
               res.writeHead(200, {'Content-Type': 'text/plain'});
-              res.end('Hello World\n');
+              res.end('Hello New York\n');
             }).listen(3001, '127.0.0.1');
             console.log('Server running at http://127.0.0.1:3001/');
 
@@ -224,7 +224,7 @@ html
             var app = express();
              
             app.get('/', function(req, res) {
-                res.send('Hello World\n');
+                res.send('Hello Seattle\n');
             });
 
             app.listen(3001);
@@ -257,14 +257,14 @@ html
         hr
         pre
           code.language-javascript.
-            app.get('/snack/:brand', function(req, res) {
+            app.get('/musician/:name', function(req, res) {
 
-                // Get /snack/nabisco
-                console.log(req.params.brand)
-                // => nabisco
+                // Get /musician/Matt
+                console.log(req.params.name)
+                // => Matt
 
-                res.send('{"id": 1,"brand": "nabisco","products": 
-                  [{"id": 1, "name": "oreo"}]}');
+                res.send('{"id": 1,"name":"Matt", 
+                  "band":"BBQ Brawlers"}');
             });
 
       section(data-bespoke-state='express')
@@ -274,8 +274,8 @@ html
         pre
           code.language-javascript.
             res.send({ some: 'json' });
-            res.send('html for oreo page');
-            res.send(404, 'No snacks here');
+            res.send("html for Maximum Pain's web page");
+            res.send(404, 'No musicians here');
             res.send(500, { error: 'you blew it' });
             res.send(200);
 
@@ -286,27 +286,27 @@ html
         pre
           code.language-javascript.
             module.exports = function(app){
-              var snacks = require('./controllers/snacks');
+              var musicians = require('./controllers/musicians');
 
-              app.get('/snacks', snacks.findAll);
-              app.get('/snacks/:id', snacks.findById);
-              app.post('/snacks', snacks.add);
-              app.put('/snacks/:id', snacks.update);
-              app.delete('/snacks/:id', snacks.delete);
+              app.get('/musicians', musicians.findAll);
+              app.get('/musicians/:id', musicians.findById);
+              app.post('/musicians', musicians.add);
+              app.put('/musicians/:id', musicians.update);
+              app.delete('/musicians/:id', musicians.delete);
             }
 
       section(data-bespoke-state='express')
         h2 JS Modules
-        h3 controllers/snacks.js
+        h3 controllers/musicians.js
         hr
         pre
           code.language-javascript.
             exports.findAll = function(req, res){
               res.send([{
                 "id": 1,
-                "title": "Oreo",
-                "brand": "Nabisco",
-                "count": "3"
+                "name": "Max",
+                "band": "Maximum Pain",
+                "instrument": "guitar"
               }]);
             };
 
@@ -323,7 +323,7 @@ html
             require('routes')(app);
 
             app.listen(3001);
-            console.log('Listening on port 3001...');
+            console.log("Jammin\' on port 3001...");
 
       section(data-bespoke-state='express')
         h2 Node.js
@@ -334,20 +334,20 @@ html
 
       section(data-bespoke-state='express')
         h2 REST GET
-        h3 /snacks
-        img(src="img/browser-snacks.gif",height="282",width="394")
+        h3 /musicians
+        img(src="img/browser-musicians.gif",height="282",width="394")
 
       section(data-bespoke-state='express')
         h2 Mongo DB
-        h3 controllers/snacks.js
+        h3 controllers/musicians.js
         hr
         pre
           code.language-javascript.
             var mongoose = require('mongoose'),
-            Snack = mongoose.model('Snack');
+            Musician = mongoose.model('Musician');
           
             exports.findAll = function(req, res){
-              Snack.find({},function(err, results) {
+              Musician.find({},function(err, results) {
                 return res.send(results);
               });
             };
@@ -394,7 +394,7 @@ html
               app.use(express.bodyParser());
             });
              
-            require('./models/snack')
+            require('./models/musicians')
             require('./routes')(app);
 
             app.listen(3001);
@@ -402,19 +402,19 @@ html
 
       section(data-bespoke-state='mongo')
         h2 Model Schema
-        h3 models/snack.js
+        h3 models/musician.js
         pre 
           code.language-javascript.
             var mongoose = require('mongoose'),
             Schema = mongoose.Schema;
 
-            var SnackSchema = new Schema({
-              title: String,
-              brand: String,
-              count: String
+            var MusicianSchema = new Schema({
+              name: String,
+              band: String,
+              instrument: String
             });
 
-            mongoose.model('Snack', SnackSchema);
+            mongoose.model('Musician', MusicianSchema);
 
       section(data-bespoke-state='mongo')
         h2 Mongo
@@ -425,27 +425,27 @@ html
 
       section(data-bespoke-state='mongo')
         h2 REST GET
-        h3 /snacks
-        img(src="img/browser-no-snacks.gif",height="282",width="394")
+        h3 /musicians
+        img(src="img/browser-no-musicians.gif",height="282",width="394")
 
       section(data-bespoke-state='mongo')
         h2 Mongo Data Import
         h3 add route to routes.js
         pre 
           code.language-javascript.
-            app.get('/import', snacks.import);  
+            app.get('/import', musicians.import);  
 
       section(data-bespoke-state='mongo')
         h2 Mongo Data Import
-        h3 add method to controller/snacks.js
+        h3 add method to controller/musicians.js
         pre 
           code.language-javascript.            
             exports.import = function(req, res){
-              Snack.create(
-                { "title": "Oreo","brand": "Nabisco", "count": "3" },
-                { "title": "Nutter Butter", "brand": "Nabisco", "count": "5" },
-                { "title": "baby carrots", "brand": "Bodega Plus", "count": "1" },
-                { "title": "Koala Yummies", "brand": "Lotte Co.", "count": "0" }   
+              Musician.create(
+                { "name": "Ben", "band": "DJ Code Red", "instrument": "Reason" },
+                { "name": "Mike D.","band": "Kingston Kats", "instrument": "drums" },
+                { "name": "Eric", "band": "Eric", "instrument": "piano" },
+                { "name": "Paul", "band": "The Eyeliner", "instrument": "guitar" }   
               , function (err) {                
                 if (err) return console.log(err); 
                 return res.send(202);
@@ -466,42 +466,42 @@ html
 
       section(data-bespoke-state='mongo')
         h2 Data Imported
-        h3 /snacks
+        h3 /musicians
         img(src="img/browser-data.gif",height="282",width="394")
 
       section(data-bespoke-state='mongo')
         h2 Route GET to findAll
-        h3 app.get('/snacks', snacks.findAll); 
+        h3 app.get('/musicians', musicians.findAll); 
         hr
         pre
           code.language-javascript.
             exports.findAll = function(req, res){
-              Snack.find({},function(err, results) {
+              Musician.find({},function(err, results) {
                 return res.send(results);
               });
             };    
 
       section(data-bespoke-state='mongo')
         h2 Route GET to findById
-        h3 app.get('/snacks/:id', snacks.findById);
+        h3 app.get('/musicians/:id', musicians.findById);
         hr
         pre
           code.language-javascript.
             exports.findById = function(req, res){
               var id = req.params.id;
-              Snack.findOne({'_id':id},function(err, result) {
+              Musician.findOne({'_id':id},function(err, result) {
                 return res.send(result);
               });
             };
 
       section(data-bespoke-state='mongo')
         h2 GET by Id
-        h3 /snacks/:id
+        h3 /musicians/:id
         img(src="img/browser-by-id.gif",height="282",width="394")  
 
       section(data-bespoke-state='mongo')
         h2 Route PUT to update
-        h3 app.put('/snacks/:id', snacks.update);
+        h3 app.put('/musicians/:id', musicians.update);
         hr
         pre
           code.language-javascript.
@@ -509,10 +509,10 @@ html
               var id = req.params.id;
               var updates = req.body;
 
-              Snack.update({'_id':id}, req.body, 
+              Musician.update({'_id':id}, req.body, 
                 function (err, numberAffected) {
                   if (err) return console.log(err);
-                  console.log('Updated %d documents', numberAffected);
+                  console.log('Updated %d musicians', numberAffected);
               });
             }   
 
@@ -522,24 +522,25 @@ html
         hr
         pre 
           code.language-javascript.
-            $ curl -i -X PUT -H 'Content-Type: application/json' -d '{"count": "2"}' 
-              http://localhost:3001/snacks/535ea3fc29b5c50000c685db
+            $ curl -i -X PUT -H 'Content-Type: application/json' 
+              -d '{"band": "BBQ Brawlers"}' 
+              http://localhost:3001/musicians/535fe13ac688500000c2b28b
 
       section(data-bespoke-state='mongo')
         h2 Updated
-        h3 /snacks/:id
+        h3 /musicians/:id
         img(src="img/browser-put.gif",height="282",width="394") 
 
       section(data-bespoke-state='mongo')
         h2 Route POST to add
-        h3 app.post('/snacks', snacks.add);
+        h3 app.post('/musicians', musicians.add);
         hr
         pre
           code.language-javascript.
             exports.add = function(req, res) {
-              Snack.create(req.body, function (err, snack) {
+              Musician.create(req.body, function (err, musician) {
                 if (err) return console.log(err); 
-                return res.send(snack);
+                return res.send(musician);
               });
             }   
 
@@ -550,23 +551,24 @@ html
         pre 
           code.language-javascript.
             $ curl -i -X POST -H 'Content-Type: application/json' -d 
-              '{"title": "Milano", "brand": "Pepperidge Farm","count":"3"}' 
-              http://localhost:3001/snacks 
+              '{"name": "Joe", "band": "Abita Boys",
+              "instrument":"voice"}' 
+              http://localhost:3001/musicians 
 
       section(data-bespoke-state='mongo')
         h2 Added
-        h3 /snacks
+        h3 /musicians
         img(src="img/browser-post.gif",height="282",width="394")   
       
       section(data-bespoke-state='mongo')
         h2 Route DELETE to delete
-        h3 app.delete('/snacks/:id', snacks.delete);
+        h3 app.delete('/musicians/:id', musicians.delete);
         hr
         pre
           code.language-javascript.
             exports.delete = function(req, res){
               var id = req.params.id;
-              Snack.remove({'_id':id},function(result) {
+              Musician.remove({'_id':id},function(result) {
                 return res.send(result);
               });
             };
@@ -577,11 +579,12 @@ html
         hr
         pre 
           code.language-javascript.
-            $ curl -i -X DELETE http://localhost:3001/snacks/535ec13f9b9d6f0000b2acca
+            $ curl -i -X DELETE 
+              http://localhost:3001/musicians/535feac1cc539500000a209f
 
       section(data-bespoke-state='mongo')
         h2 Deleted
-        h3 /snacks
+        h3 /musicians
         img(src="img/browser-delete.gif",height="282",width="394")  
 
       section(data-bespoke-state='title')
