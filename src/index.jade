@@ -31,95 +31,8 @@ html
             li musician.js
 
     div#terminal
-      ul
-        li $ cd noderest/
-        li $ node server.js
-        li Server running at http://127.0.0.1:3001/
-        li $ npm install
-        li 
-          span.synt-hi-node npm
-          &nbsp;
-          span.synt-hi-http http
-          &nbsp;
-          span.synt-hi-prot GET 
-          span https://registry.npmjs.org/express
-        li 
-          span.synt-hi-node npm
-          &nbsp;
-          span.synt-hi-http http
-          &nbsp;
-          span.synt-hi-prot 200 
-          span https://registry.npmjs.org/express
-        li express@3.5.2 node_modules/express
-        li ├── methods@0.1.0
-        li ├── merge-descriptors@0.0.2
-        li ├── cookie@0.1.2
-        li ├── cookie-signature@1.0.3
-        li ├── range-parser@1.0.0
-        li ├── debug@0.8.1
-        li ├── fresh@0.2.2
-        li ├── buffer-crc32@0.2.1
-        li ├── mkdirp@0.4.0
-        li ├── commander@1.3.2 (keypress@0.1.0)
-        li ├── send@0.3.0 (debug@0.8.0, mime@1.2.11)
-        li └── connect@2.14.5 (response-time@1.0.0, pause@0.0.1, connect-timeout@1.0.0, method-override@1.0.0, qs@0.6.6, basic-auth-connect@1.0.0, vhost@1.0.0, bytes@0.3.0, raw-body@1.1.4, static-favicon@1.0.2, errorhandler@1.0.0, setimmediate@1.0.1, serve-static@1.1.0, morgan@1.0.0, csurf@1.1.0, cookie-parser@1.0.1, compression@1.0.0, express-session@1.0.2, serve-index@1.0.1, multiparty@2.2.0)
-        li $
-        li $ node server.js
-        li Listening on port 3001...        
-        li $
-        li $ node server.js
-        li Jammin' on port 3001...
-        li $ mongod
-        li &nbsp;
-        li $ npm install mongoose --save-dev
-        li 
-          span.synt-hi-node npm
-          &nbsp;
-          span.synt-hi-http http
-          &nbsp;
-          span.synt-hi-prot GET 
-          span https://registry.npmjs.org/mongoose
-        li 
-          span.synt-hi-node npm
-          &nbsp;
-          span.synt-hi-http http
-          &nbsp;
-          span.synt-hi-prot 200 
-          span https://registry.npmjs.org/mongoose
-        li > kerberos@0.0.3 install /Applications/MAMP/htdocs/noderest_project/node_modules/mongoose/node_modules/mongodb/node_modules/kerberos
-        li > (node-gyp rebuild 2> builderror.log) || (exit 0)
-        li 
-        li CXX(target) Release/obj.target/kerberos/lib/kerberos.o
-        li SOLINK_MODULE(target) Release/bson.node: Finished
-        li mongoose@3.8.8 node_modules/mongoose
-        li ├── regexp-clone@0.0.1
-        li ├── muri@0.3.1
-        li ├── sliced@0.0.5
-        li ├── hooks@0.2.1
-        li ├── mpath@0.1.1
-        li ├── mpromise@0.4.3
-        li ├── ms@0.1.0
-        li ├── mquery@0.5.3 (debug@0.7.4)
-        li └── mongodb@1.3.23 (kerberos@0.0.3, bson@0.2.5)
-        li $
-        li $ node server.js
-        li Listening on port 3001...
-        li curl -i -X PUT -H 'Content-Type: application/json' -d '{"instrument": "voice"}' http://localhost:3001/musicians/535ea3fc29b5c50000c685db
-        li HTTP/1.1 200 OK
-        li X-Powered-By: Express
-        li Content-Type: application/json; charset=utf-8
-        li Content-Length: 88
-        li Date: Mon, 28 Apr 2014 22:27:04 GMT
-        li Connection: keep-alive
-        li &nbsp;
-        li {
-        li    "updatedExisting": true,
-        li    "n": 1,
-        li    "connectionId": 330,
-        li    "err": null,
-        li    "ok": 1
-        li  }
-        li $ 
+      ul#terminal-list
+        
 
 
 
@@ -135,22 +48,22 @@ html
       section(data-bespoke-state='intro')
         h2 REST + PHP
         ul
-          li 
-          li Apache
-          li .php controllers
-          li .htaccess pretty urls
-          li Content-Type JSON Headers
-          li MySQLi 
+          li.bullet 
+          li.bullet Apache
+          li.bullet .php controllers
+          li.bullet .htaccess pretty urls
+          li.bullet Content-Type JSON Headers
+          li.bullet MySQLi 
 
       section(data-bespoke-state='intro')
         h2 REST + Nodejs
         ul
-          li 
-          li Node.js
-          li Express
-          li JavaScript modules
-          li Routes
-          li Mongo
+          li.bullet 
+          li.bullet Node.js
+          li.bullet Express
+          li.bullet JavaScript modules
+          li.bullet Routes
+          li.bullet Mongo
 
       section(data-bespoke-state='node')
         h2 Node.js
@@ -173,10 +86,15 @@ html
           code.language-javascript.
             $ cd noderest/
             $ node server.js
+        ul.for-terminal
+          li $ cd noderest/
+          li $ node server.js
 
       section#npm-install(data-bespoke-state='node')
         h2 Node.js 
         h3 start node
+        ul.for-terminal
+          li Server running at http://127.0.0.1:3001/
 
       section(data-bespoke-state='node')
         h2 Node.js
@@ -208,10 +126,41 @@ html
         pre
           code.language-javascript.
             $ npm install
+        ul.for-terminal
+          li $ npm install
 
       section(data-bespoke-state='express')
         h2 Express
         h3 installing
+        ul.for-terminal
+          li 
+            span.synt-hi-node npm
+            &nbsp;
+            span.synt-hi-http http
+            &nbsp;
+            span.synt-hi-prot GET 
+            span https://registry.npmjs.org/express
+          li 
+            span.synt-hi-node npm
+            &nbsp;
+            span.synt-hi-http http
+            &nbsp;
+            span.synt-hi-prot 200 
+            span https://registry.npmjs.org/express
+          li express@3.5.2 node_modules/express
+          li ├── methods@0.1.0
+          li ├── merge-descriptors@0.0.2
+          li ├── cookie@0.1.2
+          li ├── cookie-signature@1.0.3
+          li ├── range-parser@1.0.0
+          li ├── debug@0.8.1
+          li ├── fresh@0.2.2
+          li ├── buffer-crc32@0.2.1
+          li ├── mkdirp@0.4.0
+          li ├── commander@1.3.2 (keypress@0.1.0)
+          li ├── send@0.3.0 (debug@0.8.0, mime@1.2.11)
+          li └── connect@2.14.5 (response-time@1.0.0, pause@0.0.1, connect-timeout@1.0.0, method-override@1.0.0, qs@0.6.6, basic-auth-connect@1.0.0, vhost@1.0.0, bytes@0.3.0, raw-body@1.1.4, static-favicon@1.0.2, errorhandler@1.0.0, setimmediate@1.0.1, serve-static@1.1.0, morgan@1.0.0, csurf@1.1.0, cookie-parser@1.0.1, compression@1.0.0, express-session@1.0.2, serve-index@1.0.1, multiparty@2.2.0)
+          li $
 
       section(data-bespoke-state='express')
         h2 Add Express
@@ -236,6 +185,10 @@ html
         pre 
           code.language-javascript.
             CTRL+C
+        ul.for-terminal
+          li $
+          li $ node server.js
+          li Listening on port 3001... 
 
       section(data-bespoke-state='express')
         h2 Node and Express
@@ -331,6 +284,10 @@ html
         pre 
           code.language-javascript.
             CTRL+C
+        ul.for-terminal
+          li $
+          li $ node server.js
+          li Jammin' on port 3001... 
 
       section(data-bespoke-state='express')
         h2 REST GET
@@ -359,6 +316,9 @@ html
         pre
           code.language-javascript.
             $ mongod
+        ul.for-terminal 
+          li $ mongod
+          li &nbsp;
 
       section(data-bespoke-state='mongo')
         h2 Mongoose.js
@@ -367,10 +327,43 @@ html
         pre
           code.language-javascript.
             $ npm install mongoose --save-dev
+        ul.for-terminal 
+          li $ npm install mongoose --save-dev
 
       section(data-bespoke-state='mongo')
         h2 Mongoose.js
         h3 installing
+        ul.for-terminal 
+          li 
+            span.synt-hi-node npm
+            &nbsp;
+            span.synt-hi-http http
+            &nbsp;
+            span.synt-hi-prot GET 
+            span https://registry.npmjs.org/mongoose
+          li 
+            span.synt-hi-node npm
+            &nbsp;
+            span.synt-hi-http http
+            &nbsp;
+            span.synt-hi-prot 200 
+            span https://registry.npmjs.org/mongoose
+          li > kerberos@0.0.3 install /Applications/MAMP/htdocs/noderest_project/node_modules/mongoose/node_modules/mongodb/node_modules/kerberos
+          li > (node-gyp rebuild 2> builderror.log) || (exit 0)
+          li 
+          li CXX(target) Release/obj.target/kerberos/lib/kerberos.o
+          li SOLINK_MODULE(target) Release/bson.node: Finished
+          li mongoose@3.8.8 node_modules/mongoose
+          li ├── regexp-clone@0.0.1
+          li ├── muri@0.3.1
+          li ├── sliced@0.0.5
+          li ├── hooks@0.2.1
+          li ├── mpath@0.1.1
+          li ├── mpromise@0.4.3
+          li ├── ms@0.1.0
+          li ├── mquery@0.5.3 (debug@0.7.4)
+          li └── mongodb@1.3.23 (kerberos@0.0.3, bson@0.2.5)
+          li $
 
       section(data-bespoke-state='mongo')
         h2 Update Server
@@ -422,6 +415,9 @@ html
         pre 
           code.language-javascript.
             CTRL+C
+        ul.for-terminal 
+          li $ node server.js
+          li Listening on port 3001...
 
       section(data-bespoke-state='mongo')
         h2 REST GET
@@ -458,6 +454,9 @@ html
         pre 
           code.language-javascript.
             CTRL+C
+        ul.for-terminal 
+          li $ node server.js
+          li Listening on port 3001...
 
       section(data-bespoke-state='mongo')
         h2 Run Import
@@ -525,6 +524,24 @@ html
             $ curl -i -X PUT -H 'Content-Type: application/json' 
               -d '{"band": "BBQ Brawlers"}' 
               http://localhost:3001/musicians/535fe13ac688500000c2b28b
+        ul.for-terminal 
+          li curl -i -X PUT -H 'Content-Type: application/json' -d '{"instrument": "voice"}' http://localhost:3001/musicians/535ea3fc29b5c50000c685db
+          li HTTP/1.1 200 OK
+          li X-Powered-By: Express
+          li Content-Type: application/json; charset=utf-8
+          li Content-Length: 88
+          li Date: Mon, 28 Apr 2014 22:27:04 GMT
+          li Connection: keep-alive
+          li &nbsp;
+          li {
+          li    "updatedExisting": true,
+          li    "n": 1,
+          li    "connectionId": 330,
+          li    "err": null,
+          li    "ok": 1
+          li  }
+          li Updated 1 musicians
+          li $ 
 
       section(data-bespoke-state='mongo')
         h2 Updated
@@ -554,6 +571,8 @@ html
               '{"name": "Joe", "band": "Abita Boys",
               "instrument":"voice"}' 
               http://localhost:3001/musicians 
+        ul.for-terminal 
+          li curl -i -X POST -H 'Content-Type: application/json' -d '{"name": "Joe", "band": "Abita Boys", "instrument":"voice"}' http://localhost:3001/musicians 
 
       section(data-bespoke-state='mongo')
         h2 Added
@@ -581,7 +600,15 @@ html
           code.language-javascript.
             $ curl -i -X DELETE 
               http://localhost:3001/musicians/535feac1cc539500000a209f
+        ul.for-terminal
+          li curl -i -X DELETE http://localhost:3001/musicians/535fe565c688500000c2b28d
+          li HTTP/1.1 200 OK
+          li X-Powered-By: Express
+          li Content-Length: 0
+          li Date: Tue, 29 Apr 2014 18:10:25 GMT
+          li Connection: keep-alive
 
+          
       section(data-bespoke-state='mongo')
         h2 Deleted
         h3 /musicians

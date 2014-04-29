@@ -1,7 +1,7 @@
 var deck = bespoke.from('article', {
   keys: true,
   touch: true,
-  bullets: 'li, .bullet',
+  bullets: '.bullet',
   scale: true,
   hash: true,
   progress: true,
@@ -16,17 +16,49 @@ if(document.body.style.opacity == 0) {
 }
 
 var terminal = document.getElementById('terminal');
-var lis = terminal.getElementsByTagName('li');
-var liIndx = 0;
+var terminalList = document.getElementById('terminal-list');
+
+var liQueue = [];
+var curSlide = 0;
+var loadingSlide = 0;
 
 deck.on('activate', function(e) {
-  // fade in
 
   updateFolder(e);
-  console.log('cur index',e.index)
-  updateTerminal(e)
-  
+  curSlide = e.index;
+
+  var lis = getSlideLis(e.slide)
+  if(lis) {  
+    loadingSlide = e.index;
+    liQueue = liQueue.concat(lis)
+
+    showNextLi()
+  }  
 });
+
+function getSlideLis(slide) {
+  var ul = slide.getElementsByClassName('for-terminal');
+  if( ul != undefined && ul[0] != undefined ) 
+    return Array.prototype.slice.call( ul[0].children );
+  else return false;
+}
+
+var waitingToAdd = null;
+function showNextLi() {
+
+  var li = liQueue.shift();
+  if(li == undefined)
+    return false;
+  var clone = document.createElement("li");
+  clone.innerHTML = li.innerHTML;
+  terminalList.appendChild(clone);
+  
+  terminal.scrollTop = terminal.scrollHeight;
+
+  // add next child
+  var wait = ( curSlide == loadingSlide ) ? 320 : 0;
+  setTimeout(showNextLi,wait)
+}
 
 function updateFolder(e) {
   var step = 0, term = 0;
@@ -43,9 +75,11 @@ function updateFolder(e) {
   } else if ( e.index < 18 ) {
     step = 4   
   } else if ( e.index < 27 ) {
-    step = 5   
-  } else {
+    step = 5  
+  } else if ( e.index < 47 ) {
     step = 6
+  } else {
+    step = 0
   } 
 
   if(step > 0)
@@ -53,93 +87,5 @@ function updateFolder(e) {
   else
     document.body.className = '' 
 }
-
-function updateTerminal(e) {
-
-  if( e.index > 4 && lis[1].style.display != 'block') {
-    terminal.className = 'show-term'
-
-    showNextLi()
-    setTimeout(function() {
-      showNextLi()
-    }, 500);
-  }
-
-  if( e.index > 5 && lis[2].style.display != 'block') {
-    showNextLi()
-  }
-
-  if( e.index > 8 && lis[3].style.display != 'block') {
-    showNextLi()
-  }
-
-  if( e.index > 9 && lis[6].style.display != 'block') {
-    var timing = (e.index == 10) ? 250: 0;
-
-    setTimeout(function() {
-      showNextLi()
-      window.term = setInterval(function() {
-        showNextLi()
-        if( liIndx > 19 ) 
-          window.clearInterval(window.term)
-     }, timing);
-    }, 1000)
-  }
-
-  if( e.index > 11 && lis[20].style.display != 'block') {
-    showNextLi();
-    setTimeout(function() {
-      showNextLi()
-    }, 500)
-  }
-
-  if( e.index > 19 && lis[22].style.display != 'block') {
-    showNextLi();
-    setTimeout(function() {
-      showNextLi()
-      setTimeout(function() {
-        showNextLi()
-      }, 500)
-    }, 500)
-  }
-
-  if( e.index > 22  && lis[26].style.display != 'block') {
-    showNextLi();   
-    setTimeout(function() {
-      showNextLi()
-    }, 500) 
-  }
-
-  if( e.index > 23  && lis[28].style.display != 'block') {
-    showNextLi();   
-  }
-
-  if( e.index > 24  && lis[29].style.display != 'block') {
-    setTimeout(function() {
-      showNextLi()
-      window.term = setInterval(function() {
-        showNextLi()
-        if( liIndx > 45 ) 
-          window.clearInterval(window.term)
-     }, timing);
-    }, 1000)
-  }
-
-  if( e.index > 27  && lis[46].style.display != 'block') {
-    showNextLi()
-    setInterval(function() {
-      showNextLi()
-     }, 500);
-  }
-
-}
-
-function showNextLi() {
-  console.log('showing',liIndx)
-  lis[liIndx].style.display = 'block';
-  liIndx ++ 
-  terminal.scrollTop = terminal.scrollHeight;
-}
-
 
 try{Typekit.load();}catch(e){}      
