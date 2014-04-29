@@ -29,5 +29,5 @@ $ grunt
 * [Bespoke.js](https://github.com/markdalgleish/bespoke.js)
 
 ## TODO
-4. finalize readme
+4. fix livereload
 5. fix so it doesnt restart node when non server files change
