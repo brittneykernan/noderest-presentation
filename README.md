@@ -17,8 +17,8 @@ $ grunt server
 ```
 
 ## TODO
-1. Show screenshots of in browser responses
-2. Fix slide colors
-3. Do the mongo part?
+1. change snacks to band members
+2. Figure out li and file automization
+3. add curl parts to terminal
 4. finalize readme
 5. end slide slide out folder and terminal
