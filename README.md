@@ -18,4 +18,4 @@ $ grunt server
 
 ## TODO
 4. finalize readme
-5. add final cope to project
+5. fix so it doesnt restart node when non server files change
