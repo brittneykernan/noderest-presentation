@@ -18,7 +18,7 @@ app.configure(function(){
 app.use(express.favicon(__dirname + '/public/favicon.ico'));
 app.use(express.static(__dirname + '/public'));
 
-require('./src/models/snack')
+require('./src/models/musician')
 require('./src/routes')(app);
 
 app.listen(3000);

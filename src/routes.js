@@ -1,16 +1,16 @@
 module.exports = function(app){
 
-	var snacks = require('./controllers/snacks');
+	var musicians = require('./controllers/musicians');
 
-	app.get('/snacks', snacks.findAll); 
-	app.get('/snacks/:id', snacks.findById); 
-  app.put('/snacks/:id', snacks.update);
-  app.post('/snacks', snacks.add);
-  app.delete('/snacks/:id', snacks.delete);
-	app.get('/import', snacks.import);  
+	app.get('/musicians', musicians.findAll); 
+	app.get('/musicians/:id', musicians.findById); 
+  app.put('/musicians/:id', musicians.update);
+  app.post('/musicians', musicians.add);
+  app.delete('/musicians/:id', musicians.delete);
+	app.get('/import', musicians.import);  
 
 	app.get('/hello', function(req, res) {
-	    res.send('Hello World\n');
+	    res.send('Hello New York\n');
 	});
 
 };
