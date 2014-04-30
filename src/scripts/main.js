@@ -27,6 +27,9 @@ deck.on('activate', function(e) {
   updateFolder(e);
   curSlide = e.index;
 
+  if(curSlide == 5)
+    terminal.className = 'show-term';
+
   var lis = getSlideLis(e.slide)
   if(lis) {  
     loadingSlide = e.index;
